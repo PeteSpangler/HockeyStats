@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './nhl.png';
 import './App.css';
+import { Teams } from './components/fetchData';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <Teams />
     </div>
   );
 }
