@@ -1,26 +1,24 @@
 import React from 'react';
 import logo from './nhl.png';
 import './App.css';
-import { Teams } from './components/fetchData';
+import Teams from './components/fetchTeams';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
+        <p>Click the link below to check out some NHL Teams!</p>
         <a
           className="App-link"
-          href="https://reactjs.org"
+          href="https://statsapi.web.nhl.com/api/v1/teams"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          NHL Teams
         </a>
       </header>
-      <Teams />
+      <body>More Styling to come!</body>
     </div>
   );
 }
