@@ -1,28 +1,24 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import axios from 'axios';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
-type Team = {
-  id: number;
-  name: string;
-};
-
-type TeamsPage = {
-  results: Team[];
-};
-
-async function getTeam({ teamParam = 1 }) {
-  const res = await fetch(
-    `https://statsapi.web.nhl.com/api/v1/teams/${teamParam}`,
+export default function GetTeam() {
+  const { isLoading, error, data, isFetching } = useQuery('teams', () =>
+    fetch('https://statsapi.web.nhl.com/api/v1/teams/').then((res) =>
+      res.json(),
+    ),
   );
-  if (!res.ok) {
-    throw new Error('Error fetching data');
-  }
-  const dataFromServer = await res.json();
-  const data: TeamsPage = {
-    results: dataFromServer.results,
-  };
-  return data;
-}
+  if (isLoading) return 'Loading...';
+  if (error) return 'An Error has occured:';
 
-export default function Teams() {}
+  return (
+    <div>
+      <h1>{data.name}</h1>
+      <p>{data.link}</p>
+      <strong>{data.locationName}</strong>
+      <strong>{data.shortName}</strong>
+      <div>{isFetching ? 'Updating...' : ''}</div>
+      <ReactQueryDevtools initialIsOpen />
+    </div>
+  );
+}

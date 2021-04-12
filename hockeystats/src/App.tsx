@@ -1,7 +1,6 @@
 import React from 'react';
 import logo from './nhl.png';
 import './App.css';
-import Teams from './components/fetchTeams';
 
 function App() {
   return (
