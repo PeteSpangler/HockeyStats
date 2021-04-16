@@ -1,4 +1,3 @@
-import React from 'react';
 import logo from './nhl.png';
 import './App.css';
 
@@ -17,7 +16,7 @@ function App() {
           NHL Teams
         </a>
       </header>
-      <body>More Styling to come!</body>
+      <body className="App-body"></body>
     </div>
   );
 }
