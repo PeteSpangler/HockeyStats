@@ -1,5 +1,6 @@
 import logo from './nhl.png';
 import './App.css';
+import FetchTeams from './fetchTeams';
 
 function App() {
   return (
@@ -16,7 +17,13 @@ function App() {
           NHL Teams
         </a>
       </header>
-      <body className="App-body"></body>
+      {
+        <div>
+          <body className="App-body">
+            <FetchTeams />
+          </body>
+        </div>
+      }
     </div>
   );
 }
