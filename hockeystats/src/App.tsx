@@ -1,6 +1,7 @@
 import logo from './nhl.png';
 import './App.css';
 import FetchTeams from './fetchTeams';
+import React from 'react';
 
 function App() {
   return (
@@ -19,11 +20,12 @@ function App() {
       </header>
       {
         <div>
-          <body className="App-body">
-            <FetchTeams />
-          </body>
+          <body className="App-body">Bozo</body>
         </div>
       }
+      <React.Fragment>
+        <FetchTeams />
+      </React.Fragment>
     </div>
   );
 }

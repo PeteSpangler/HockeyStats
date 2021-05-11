@@ -1,30 +1,49 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-
+import * as React from 'react';
 import { useQuery } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import axios from 'axios';
 
-export default function FetchTeams() {
-  const { isLoading, error, data, isFetching } = useQuery('teamsData', () =>
-    fetch('https://statsapi.web.nhl.com/api/v1/teams').then((res) =>
-      res.json(),
-    ),
+type Teams = {
+  id: number;
+  name: string;
+};
+
+function GetTeams() {
+  return useQuery(
+    'teams',
+    async (): Promise<Array<Teams>> => {
+      const { data } = await axios.get(
+        'https://statsapi.web.nhl.com/api/v1/teams',
+      );
+      return data.teams;
+    },
   );
+}
 
-  if (isLoading) return 'Loading...';
-
-  if (error) return 'An error has occurred: ' + error.message;
+function FetchTeams() {
+  const { status, error, data, isFetching } = GetTeams();
 
   return (
     <div>
-      {
-        <ul>
-          {data.teams.map((teams) => (
-            <li key={teams.id}>{teams.name}</li>
-          ))}
-        </ul>
-      }
-      <div>{isFetching ? 'Updating...' : ''}</div>
-      <ReactQueryDevtools initialIsOpen />
+      {status === 'loading' ? (
+        'Loading...'
+      ) : error instanceof Error ? (
+        <span>Error: {error.message}</span>
+      ) : (
+        <>
+          <ul>
+            {data?.map((teams) => (
+              <div>
+                <li key={teams.id}>{teams.name}</li>
+              </div>
+            ))}
+          </ul>
+          <div>{isFetching ? 'Updating...' : ''}</div>
+          <ReactQueryDevtools initialIsOpen />
+        </>
+      )}
     </div>
   );
 }
+export default FetchTeams;
