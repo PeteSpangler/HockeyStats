@@ -17,15 +17,8 @@ function App() {
         >
           NHL Teams
         </a>
-      </header>
-      {
-        <div>
-          <body className="App-body">Bozo</body>
-        </div>
-      }
-      <React.Fragment>
         <FetchTeams />
-      </React.Fragment>
+      </header>
     </div>
   );
 }

@@ -7,6 +7,7 @@ import axios from 'axios';
 type Teams = {
   id: number;
   name: string;
+  firstYearOfPlay: string;
 };
 
 function GetTeams() {
@@ -35,7 +36,9 @@ function FetchTeams() {
           <ul>
             {data?.map((teams) => (
               <div>
-                <li key={teams.id}>{teams.name}</li>
+                <li key={teams.id}>
+                  {teams.name} debuted in {teams.firstYearOfPlay}
+                </li>
               </div>
             ))}
           </ul>
